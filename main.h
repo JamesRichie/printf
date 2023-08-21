@@ -8,5 +8,6 @@
 int _printf(const char *format, ...);
 int _putchar(char c);
 int _puts(char *c);
+int print_binary(unsigned int num);
 
 #endif
