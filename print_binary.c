@@ -1,42 +1,39 @@
 #include "main.h"
 
 /**
- * print_binary - converts an unsigned int to binary
- * @num: int to be converted
+ * _printf - Prints an input
+ * @format: Input to be printed
  *
- * Return: no of resulting binary characters
+ * Return: Output
  */
-int print_binary(unsigned int num)
+_printf(const char *format, ...)
 {
-	int chars_printed = 0, idx = 0;
-	char bin[sizeof(unsigned int) * 8];
+	va_list args;
+	va_start(args, format);
 
-	if (num == 0)
+	while (*format != '\0')
 	{
-		chars_printed += _putchar('0');
-		return (chars_printed);
-	}
+		if (*format == '%')
+			format++;
 
-	if (num == "%b")
-	{
-		if (num == 1)
+		if (*format == 'd')
 		{
-			chars_printed += _putchar('1');
-			return (chars_printed);
+			int num = va_arg(args, int);
+			int bits = sizeof(num) * 8;
+
+			for (int i = bits - 1; i >= 0; i--)
+			{
+				_printf("%d", (num >> i) & 1);
+			}
 		}
-		while (num > 0)
+		else
 		{
-			bin[idx] = '0' + (num % 2);
-			num = num / 2;
-			idx++;
-		}
-	
-		idx--;
-		while (idx >= 0)
-		{
-			chars_printed += _putchar(bin[idx]);
-			idx--;
+			_putchar(*format);
 		}
 	}
-	return (chars_printed);
+	else
+	{
+		_putchar(*format);
+	}
+	va_end(args);
 }

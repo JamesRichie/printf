@@ -9,7 +9,7 @@
 
 int _printf(const char *format, ...)
 {
-	unsigned int x, string_count, count = 0;
+	unsigned int x, string_count, count = 0, binary;
 
 	va_list args;
 
@@ -36,6 +36,11 @@ int _printf(const char *format, ...)
 		else if (format[x + 1] == '%')
 		{
 			_putchar('%');
+		}
+		else if (format[x] == 'b')
+		{
+			binary = print_binary( unsigned int n);
+			return (binary);
 		}
 		count += 1;
 	}
